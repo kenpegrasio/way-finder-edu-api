@@ -74,3 +74,22 @@ export const deleteMeeting = async (req, res) => {
     }
   }
 };
+
+export const findMeetingbyID = async (req, res) => {
+  try {
+    const meeting = await Meeting.findOne({
+      _id: req.params.id,
+    });
+    if (!meeting) {
+      res.status(404).json({ message: "Meeting not found" });
+    } else {
+      res.status(200).json({ message: "Meeting deleted successfully" });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: "An unknown error occured" });
+    }
+  }
+};
