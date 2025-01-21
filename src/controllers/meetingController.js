@@ -83,7 +83,7 @@ export const findMeetingbyID = async (req, res) => {
     if (!meeting) {
       res.status(404).json({ message: "Meeting not found" });
     } else {
-      res.status(200).json({ message: "Meeting deleted successfully" });
+      res.status(200).json(meeting);
     }
   } catch (error) {
     if (error instanceof Error) {
