@@ -71,3 +71,22 @@ export const deleteUser = async (req, res) => {
     }
   }
 };
+
+export const updateUser = async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate({ _id: req.params.id }, req.body, {
+      new: true,
+    });
+    if (!user) {
+      res.status(404).json({ message: "User not found" });
+    } else {
+      res.status(200).json(user);
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      res.status(500).json({ message: error.message });
+    } else {
+      res.status(500).json({ message: "An Unknown error occured" });
+    }
+  }
+};
